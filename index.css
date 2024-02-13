@@ -25,13 +25,17 @@ header {
     height: 100%;
 }
 
+.hover:hover {
+    cursor: pointer;
+}
+
 .landing-beer {
     background-color: white;
 }
 
 .random-beer {
     width: 100%;
-    height: 700px;
+    height: 800px;
     display: flex;
     flex-direction: column;
     padding-top: 20px;
@@ -42,6 +46,7 @@ header {
     height: 100%;
     margin: 0 auto;
     box-shadow: 4px 4px 4px 4px rgba(174, 169, 169, 0.574);
+    background-color: whitesmoke;
 }
 
 .beer-img {
@@ -61,10 +66,35 @@ header {
 .below-bottle {
     width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    padding-left:  20px;
+    padding-top: 16px;
     background-color: whitesmoke;
 }
 
 .beer-name {
-    margin-bottom: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    height: 80px;
+}
+
+.see-more-btn {
+    font-family: sans-serif;
+    font-size: 16px;
+    border: none;
+    background-color: whitesmoke;
+
+}
+
+.show-random {
+    text-align: center;
+    height: 65px;
+    padding: 16px;
+}
+
+.show-random-btn {
+    margin-top: 10px;
+    height: 100%;
+    font-size: 20px;
+    background-color: white;
+    border: none;
 }
