@@ -5,9 +5,22 @@ container.addEventListener('click', (e) => {
         getRandomBeer();
     }
 
+    if(e.target.classList.contains('home')){
+        document.querySelector('.section-random-beer').style.display = 'inherit';
+        document.querySelector('.section-beer-info').style.display = 'none';
+        document.querySelector('.section-beer-search').style.display = 'none';
+    }
+
     if(e.target.classList.contains('see-more-btn')){
         document.querySelector('.section-random-beer').style.display = 'none';
-        document.querySelector('.section-beer-info').style.display = 'inherit';
+        document.querySelector('.section-beer-info').style.display = 'flex';
+        document.querySelector('.section-beer-search').style.display = 'none';
+    }
+
+    if(e.target.classList.contains('search')){
+        document.querySelector('.section-random-beer').style.display = 'none';
+        document.querySelector('.section-beer-info').style.display = 'none';
+        document.querySelector('.section-beer-search').style.display = 'inherit';
     }
 });
 
@@ -23,8 +36,9 @@ async function randomBeer(){
 
 function getRandomBeer(){
     randomBeer().then((data) => {
-        console.log(data[0].description);
+        console.log(data[0]);
         document.querySelector('.beer-name').innerText = setBeerName(data);
+        document.querySelector('.bottle-name').innerText = setBeerName(data);
         document.querySelector('.b-img').src = setBeerImage(data);
         document.querySelector('.info-img').src = setBeerImage(data);
         setHops(data);
@@ -81,7 +95,7 @@ function setYeast(data){
 function setAbv(data){
     const abv = document.querySelector('.abv');
     let p = document.createElement('p');
-    p.innerText = data[0].abv;
+    p.innerText = data[0].abv + '%';
     abv.appendChild(p);
 }
 

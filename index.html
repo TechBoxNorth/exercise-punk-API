@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Punk API</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="beer-info.css">
+    <link rel="stylesheet" href="beer-search.css">
   </head>
   <body>
     <div class="container">
       <header>
         <img class="poster" src="poster.png" alt="">
+        <nav>
+          <div class="home hover">[HOME]</div>
+          <div class="see-more-btn hover">[INFO]</div>
+          <div class="search hover">[SEARCH]</div>
+        </nav>
       </header>
       <section class="section-random-beer">
         <div class="landing-beer">
           <div class="random-beer">
             <div class="beer-card">
               <div class="beer-img">
-                <img class="b-img" src="https://images.punkapi.com/v2/101.png" alt="">
+                <img class="b-img" src="" alt="">
               </div>
               <div class="below-bottle">
                 <p class="beer-name">Rip Tide</p>
@@ -30,31 +37,36 @@
         </div>
       </section>
       <section class="section-beer-info">
-        <img class="info-img" src="" alt="">
-        <article class="description">
-          <h2>Description:</h2>
-        </article>
-        <article class="abv">
-          <h2>Alocohol by volume (ABV)</h2>
-        </article>
-        <article class="volume"></article>
-        <article class="ingredients">
-          <div class="hops">
-            <h2>Hops:</h2>
-          </div>
-          <div class="malts">
-            <h2>Malts:</h2>
-          </div>
-          <div class="yeast">
-            <h2>Yeast:</h2>
-          </div>
-        </article>
-        <article class="food-pairing">
-          <h2>Food pairing:</h2>
-        </article>
-        <artticle class="brewers-tips">
-          <h2>Brewers tips:</h2>
-        </artticle>
+        <div class="beer-data">
+          <h2 class="bottle-name">Beer name</h2>
+          <article class="description">
+          <h3>Description:</h3>
+          </article>
+          <article class="abv">
+            <h3>Alocohol by volume (ABV)</h3>
+          </article>
+          <article class="volume"></article>
+          <article class="ingredients">
+            <div class="hops">
+              <h3>Hops:</h3>
+            </div>
+            <div class="malts">
+              <h3>Malts:</h3>
+            </div>
+            <div class="yeast">
+              <h3>Yeast:</h3>
+            </div>
+          </article>
+          <article class="food-pairing">
+            <h3>Food pairing:</h3>
+          </article>
+          <artticle class="brewers-tips">
+            <h3>Brewers tips:</h3>
+          </artticle>
+        </div>
+        <div class="bottle">
+          <img class="info-img" src="" alt="">
+        </div>
       </section>
       <section class="beer-search">
 
