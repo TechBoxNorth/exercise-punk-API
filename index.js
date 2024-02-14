@@ -24,6 +24,13 @@ container.addEventListener('click', (e) => {
     }
 });
 
+const searchString = document.getElementById('search-string');
+const searchForm = document.getElementById('search-form');
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log(searchString.value);
+});
+
 async function randomBeer(){
     try {
         let response = await fetch('https://api.punkapi.com/v2/beers/random');
