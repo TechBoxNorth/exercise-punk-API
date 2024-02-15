@@ -1,4 +1,6 @@
 
+
+
 const container = document.querySelector('.container');
 container.addEventListener('click', (e) => {
     if(e.target.classList.contains('show-random-btn')){
@@ -22,6 +24,13 @@ container.addEventListener('click', (e) => {
         document.querySelector('.section-beer-info').style.display = 'none';
         document.querySelector('.section-beer-search').style.display = 'inherit';
     }
+
+    if(e.target.classList.contains('list-beer')){
+        setListedBeerInfo(e.target.id);
+        document.querySelector('.section-random-beer').style.display = 'none';
+        document.querySelector('.section-beer-info').style.display = 'flex';
+        document.querySelector('.section-beer-search').style.display = 'none';
+    }
 });
 
 const searchString = document.getElementById('search-string');
@@ -30,6 +39,7 @@ const searchQuery = 'https://api.punkapi.com/v2/beers?beer_name=';
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const queryString = searchQuery + searchString.value + '&page=1&per_page=10';
+    searchString.value = '';
     console.log(queryString);
     searchingForBeers(queryString);
 });
@@ -47,6 +57,16 @@ async function searchForBeer(queryString){
 async function randomBeer(){
     try {
         let response = await fetch('https://api.punkapi.com/v2/beers/random');
+        let data = await response.json();
+        return data;
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
+}
+
+async function listedBeer(beerID){
+    try {
+        let response = await fetch(`https://api.punkapi.com/v2/beers/${beerID}`);
         let data = await response.json();
         return data;
     } catch (error) {
@@ -92,6 +112,23 @@ function searchingForBeers(queryString){
             searchList.appendChild(p);
         }
     });
+}
+
+function setListedBeerInfo(beerID){
+   listedBeer(beerID).then((data) => {
+        console.log(data[0]);
+        document.querySelector('.beer-name').innerText = setBeerName(data);
+        document.querySelector('.bottle-name').innerText = setBeerName(data);
+        document.querySelector('.b-img').src = setBeerImage(data);
+        document.querySelector('.info-img').src = setBeerImage(data);
+        setHops(data);
+        setMalts(data);
+        setYeast(data);
+        setDescription(data);
+        setAbv(data);
+        setFoodPairing(data);
+        setBrewersTips(data);
+   });
 }
 
 
