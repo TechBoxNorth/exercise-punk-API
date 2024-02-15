@@ -1,8 +1,11 @@
 
-
-
+let queryString = '';
+let searchPage = 1;
 const container = document.querySelector('.container');
 container.addEventListener('click', (e) => {
+
+    console.log(e.target);
+
     if(e.target.classList.contains('show-random-btn')){
         getRandomBeer();
     }
@@ -31,16 +34,24 @@ container.addEventListener('click', (e) => {
         document.querySelector('.section-beer-info').style.display = 'flex';
         document.querySelector('.section-beer-search').style.display = 'none';
     }
+
+    if(e.target.parentNode.closest('div').classList.contains('nav-prev')){
+        previousPage();
+    }
+
+    if(e.target.parentNode.closest('div').classList.contains('nav-next')){
+        nextPage();
+    }
 });
+
 
 const searchString = document.getElementById('search-string');
 const searchForm = document.getElementById('search-form');
 const searchQuery = 'https://api.punkapi.com/v2/beers?beer_name=';
+
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const queryString = searchQuery + searchString.value + '&page=1&per_page=10';
-    searchString.value = '';
-    console.log(queryString);
+    setQueryString();
     searchingForBeers(queryString);
 });
 
@@ -132,6 +143,28 @@ function setListedBeerInfo(beerID){
         setFoodPairing(data);
         setBrewersTips(data);
    });
+}
+
+function setQueryString(){
+    queryString = searchQuery + searchString.value + `&page=${searchPage}&per_page=10`;
+    //searchString.value = '';
+    console.log(queryString);
+}
+
+function previousPage(){
+    if(searchPage > 1){
+        searchPage -= 1;
+        console.log(searchPage);
+        searchingForBeers(queryString);
+        console.log(queryString);
+    }
+}
+
+function nextPage(){
+    searchPage += 1;
+    console.log(searchPage);
+    searchingForBeers(queryString);
+    console.log(queryString);
 }
 
 
