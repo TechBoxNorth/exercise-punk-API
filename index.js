@@ -26,10 +26,23 @@ container.addEventListener('click', (e) => {
 
 const searchString = document.getElementById('search-string');
 const searchForm = document.getElementById('search-form');
+const searchQuery = 'https://api.punkapi.com/v2/beers?beer_name=';
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log(searchString.value);
+    const queryString = searchQuery + searchString.value + '&page=1&per_page=10';
+    console.log(queryString);
+    searchingForBeers(queryString);
 });
+
+async function searchForBeer(queryString){
+    try {
+        let response = await fetch(queryString);
+        let data = await response.json();
+        return data;
+    } catch (error) {
+       console.log('Error: ' + error);
+    }
+}
 
 async function randomBeer(){
     try {
@@ -57,6 +70,30 @@ function getRandomBeer(){
         setBrewersTips(data);
     })
 }
+
+function searchingForBeers(queryString){
+    const searchList = document.querySelector('.search-list');
+    searchForBeer(queryString).then((data) => {
+        console.log(data);
+        for(let i = 0; i < data.length; i++){
+            let p = document.createElement('p');
+            p.id = data[i].id;
+            p.name = data[i].name;
+            p.innerText = p.name;
+            if(i % 2 === 0){
+                p.style.backgroundColor = 'whitesmoke';
+                p.style.color = 'grey';
+            } else {
+                p.style.backgroundColor = 'grey';
+                p.style.color = 'whitesmoke';
+            }
+            p.classList.add('hover')
+            p.classList.add('list-beer')
+            searchList.appendChild(p);
+        }
+    });
+}
+
 
 function setBeerName(data){
     return data[0].name;
