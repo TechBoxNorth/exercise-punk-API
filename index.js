@@ -93,6 +93,9 @@ function getRandomBeer(){
 
 function searchingForBeers(queryString){
     const searchList = document.querySelector('.search-list');
+
+    searchList.replaceChildren();
+
     searchForBeer(queryString).then((data) => {
         console.log(data);
         for(let i = 0; i < data.length; i++){
