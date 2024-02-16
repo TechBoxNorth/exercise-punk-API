@@ -1,6 +1,7 @@
 
 let queryString = '';
 let searchPage = 1;
+let searchPhrase = '';
 const container = document.querySelector('.container');
 container.addEventListener('click', (e) => {
 
@@ -146,14 +147,25 @@ function setListedBeerInfo(beerID){
 }
 
 function setQueryString(){
-    queryString = searchQuery + searchString.value + `&page=${searchPage}&per_page=10`;
-    //searchString.value = '';
+    if(searchString.value.length > 1){
+        searchPhrase = searchString.value;
+        searchString.value = '';
+        queryString = searchQuery + searchPhrase + `&page=${searchPage}&per_page=10`;
+    } else {
+        alert('Search phrase must be at least 2 characters long!');
+    }
+    console.log(queryString);
+}
+
+function paginatedQueryString(){
+    queryString = searchQuery + searchPhrase + `&page=${searchPage}&per_page=10`;
     console.log(queryString);
 }
 
 function previousPage(){
     if(searchPage > 1){
         searchPage -= 1;
+        paginatedQueryString();
         console.log(searchPage);
         searchingForBeers(queryString);
         console.log(queryString);
@@ -162,6 +174,7 @@ function previousPage(){
 
 function nextPage(){
     searchPage += 1;
+    paginatedQueryString();
     console.log(searchPage);
     searchingForBeers(queryString);
     console.log(queryString);
