@@ -1,4 +1,4 @@
-
+console.log('hello');
 let queryString = '';
 let searchPage = 1;
 let searchPhrase = '';
